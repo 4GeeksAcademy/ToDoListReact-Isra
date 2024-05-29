@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import "./ToDoList.css";
 import { FaTrash } from "react-icons/fa";
 
 const ToDoList = () => {
   const [toDo, setToDo] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "Task") {
+      setInputValue(value);
+    }
   };
 
   const handleAddTodo = () => {
@@ -31,26 +33,25 @@ const ToDoList = () => {
 
   return (
     <div className="container mt-5">
-      <div className="input-group mb-3">
+      <div className="w-50  my-auto mb-3">
         <input
           type="text"
           className="form-control"
           value={inputValue}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
+          name="Task"
           placeholder="Add a new task"
           style={{ border: "none", boxShadow: "none" }}
         />
       </div>
-      <ul className="list">
+      <ul className="ps-0">
         {toDo.map((todo, index) => (
           <li
             key={index}
             className="d-flex justify-content-between align-items-center mb-2"
             style={{
               padding: "5px",
-              borderRadius: "5px",
-              width: "50%",
               margin: "0 auto",
             }}
           >
